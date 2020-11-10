@@ -320,6 +320,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6573918945606477698, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
   m_PrefabInstance: {fileID: 6933627562710026279}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044940356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044940355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16732b3a9e87a164f87d627918cc559e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 100
+  currentStamina: 0
+  restoreRate: 10
+  regenCooldown: 0.5
 --- !u!1001 &6933627562710026279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,6 +386,18 @@ PrefabInstance:
     - target: {fileID: 2939206899934170421, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878985953450130944, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
+      propertyPath: dashCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878985953450130944, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
+      propertyPath: dashDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878985953450130944, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
+      propertyPath: dashCost
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6218881060317848476, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
       propertyPath: m_Sprite
