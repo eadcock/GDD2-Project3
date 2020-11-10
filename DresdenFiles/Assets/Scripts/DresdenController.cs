@@ -17,7 +17,7 @@ public class DresdenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Time.deltaTime;
-        transform.position = transform.position.RemoveZDim() + movement * speed;
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime;
+        transform.position = transform.position + movement * speed;
     }
 }
