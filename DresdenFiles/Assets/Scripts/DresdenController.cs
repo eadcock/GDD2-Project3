@@ -7,17 +7,29 @@ using quiet;
 
 public class DresdenController : MonoBehaviour
 {
+    [Tooltip("Base movement speed")]
     [SerializeField]
     private float speed;
+
+    [Header("Dash Configuration")]
+    [Tooltip("Time between dashes, in seconds")]
     [SerializeField]
     private float dashCooldown;
+    [Tooltip("How long the dash lasts, in seconds")]
     [SerializeField]
     private float dashDuration;
+    [Tooltip("How much stamina is required in order to dash")]
     [SerializeField]
     private int dashCost;
 
     private float lastDash;
     private Stamina stamina;
+
+    /// <summary>
+    /// Is Dresden currently dashing?
+    /// </summary>
+    public bool Dashing { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,9 +53,13 @@ public class DresdenController : MonoBehaviour
         {
             lastDash = Time.unscaledTime;
             speed *= 2;
-            Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(ResetSpeed);
+            Dashing = true;
+            // Stop dashing after dash duration is complete
+            Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(t =>
+            {
+                speed /= 2;
+                Dashing = false;
+            });
         }
     }
-
-    private void ResetSpeed(Task t) => speed /= 2;
 }

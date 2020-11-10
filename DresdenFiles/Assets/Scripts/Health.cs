@@ -7,6 +7,7 @@ public delegate void HealthEvent(HealthEventData healthEventData);
 
 public class Health : MonoBehaviour
 {
+    [Header("Health Configuration")]
     [SerializeField]
     private int maxHealth;
     [SerializeField]
@@ -16,10 +17,17 @@ public class Health : MonoBehaviour
     public int CurrentHealth
     {
         get => currentHealth;
+        // Never let currentHealth be negative or greater than max health
         private set => currentHealth = Mathf.Clamp(value, 0, MaxHealth);
     }
 
+    /// <summary>
+    /// Invoked when health reaches 0
+    /// </summary>
     public event HealthEvent OnDeath;
+    /// <summary>
+    /// Invoked anytime health is taken from this gameObject
+    /// </summary>
     public event HealthEvent OnDamage;
 
     // Start is called before the first frame update
@@ -28,6 +36,11 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    /// <summary>
+    /// Causes this object to lose specified amount of health
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="damage"></param>
     public void TakeDamage(GameObject source, int damage)
     {
         CurrentHealth -= damage;
