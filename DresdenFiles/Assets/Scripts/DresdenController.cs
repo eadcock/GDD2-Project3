@@ -7,6 +7,9 @@ using quiet;
 
 public class DresdenController : MonoBehaviour
 {
+    [SerializeField]
+    private DebugMode debugMode;
+
     [Tooltip("Base movement speed")]
     [SerializeField]
     private float speed;
@@ -22,8 +25,10 @@ public class DresdenController : MonoBehaviour
     [SerializeField]
     private int dashCost;
 
+
     private float lastDash;
     private Stamina stamina;
+    private Health health;
 
     /// <summary>
     /// Is Dresden currently dashing?
@@ -35,6 +40,17 @@ public class DresdenController : MonoBehaviour
     {
         lastDash = 0;
         stamina = GetComponent<Stamina>();
+        health = GetComponent<Health>();
+
+        health.OnDeath += OnDeath;
+
+        debugMode.debugActions += () =>
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                health.TakeDamage(debugMode.gameObject, 10);
+            }
+        };
     }
 
     // Update is called once per frame
@@ -45,6 +61,7 @@ public class DresdenController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
             Dash();
+
     }
 
     private void Dash()
@@ -61,5 +78,10 @@ public class DresdenController : MonoBehaviour
                 Dashing = false;
             });
         }
+    }
+
+    private void OnDeath(HealthEventData hed)
+    {
+        Debug.Log("Oh no! Dresden died to " + hed.Source);
     }
 }

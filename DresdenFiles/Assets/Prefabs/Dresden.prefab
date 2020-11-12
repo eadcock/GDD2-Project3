@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3878985953450130944}
   - component: {fileID: 241230075641256728}
   - component: {fileID: 2563984238503801321}
+  - component: {fileID: 6694392122891811382}
   m_Layer: 0
   m_Name: Dresden
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,15 +75,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3878985953450130944
@@ -97,7 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c39afdf0c0813c47b28c50d618db18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: {fileID: 0}
   speed: 4
+  dashCooldown: 0.3
+  dashDuration: 0.2
+  dashCost: 10
 --- !u!114 &241230075641256728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +128,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+--- !u!114 &6694392122891811382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6573918945606477698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16732b3a9e87a164f87d627918cc559e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 100
+  currentStamina: 0
+  restoreRate: 10
+  regenCooldown: 0.5
