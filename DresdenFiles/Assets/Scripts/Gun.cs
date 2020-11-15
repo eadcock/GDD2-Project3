@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         d = GetComponent<DresdenController>();
-        screenPos = Camera.current.WorldToScreenPoint(bullet.position);
+        screenPos = Camera.main.WorldToScreenPoint(bullet.position);
     }
 
     // Update is called once per frame

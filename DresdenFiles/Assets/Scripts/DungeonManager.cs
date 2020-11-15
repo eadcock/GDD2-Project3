@@ -79,19 +79,19 @@ public class DungeonManager : MonoBehaviour
         };
         if(pos.y < 0)
         {
-            weights[Direction.North] += Mathf.RoundToInt(1.5f * pos.y);
+            weights[Direction.North] += Mathf.RoundToInt(2f * pos.y);
         }
         if(pos.y > 0)
         {
-            weights[Direction.South] += Mathf.RoundToInt(1.5f * Math.Abs(pos.y));
+            weights[Direction.South] += Mathf.RoundToInt(2f * Math.Abs(pos.y));
         }
         if(pos.x < 0)
         {
-            weights[Direction.East] += Mathf.RoundToInt(1.5f * pos.x);
+            weights[Direction.East] += Mathf.RoundToInt(2f * pos.x);
         }
         if(pos.x > 0)
         {
-            weights[Direction.West] += Mathf.RoundToInt(1.5f * Math.Abs(pos.x));
+            weights[Direction.West] += Mathf.RoundToInt(2f * Math.Abs(pos.x));
         }
 
         int sum = weights[Direction.North] + weights[Direction.South] + weights[Direction.East] + weights[Direction.West];
@@ -103,6 +103,7 @@ public class DungeonManager : MonoBehaviour
                 return (Direction)i;
             random -= weights[(Direction)i];
         }
+        Debug.LogWarning("Defaulted");
         return Direction.North;
     }
 
