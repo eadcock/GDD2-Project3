@@ -1,13 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using quiet;
+
+public enum Direction
+{
+    North = 0,
+    East,
+    South,
+    West
+}
+
+public enum OppositeDirection
+{
+    South = 0,
+    West,
+    North,
+    East
+}
+
 public class RoomManager : MonoBehaviour
 {
     private int rows, cols;
 
+    public Dictionary<Direction, RoomManager> neighbors;
+    public Dictionary<Direction, GameObject> door;
+
+    [Header("Tile Data")]
     // [cols],[rows],[tile 1],...,[tile n-(rows*cols)]
     [SerializeField]
+    [Tooltip("g = walkable ground, o = obstacle, 0 = empty space")]
     private string[] level;
 
     public Grid grid;
@@ -15,14 +38,26 @@ public class RoomManager : MonoBehaviour
 
     public Dictionary<string, GameObject> tileTypes;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        string[] metaData = level[0].Split(',');
-        rows = int.Parse(metaData[0]);
-        cols = int.Parse(metaData[1]);
+    public Vector2 Center => grid.CellToWorld(new Vector3Int((cols / 2) - 1, (rows / 2) + 1, 0)) + new Vector3(0.5f, 0.5f, 0);
 
-        transform.position = new Vector3(-(cols / 2), -(rows / 2), transform.position.z);
+    public RoomManager this[Direction dir] { get => neighbors[dir]; set => SetNeighbor(dir, value); }
+
+    public int Rows => rows;
+    public int Columns => cols;
+
+    private GameObject doorTile;
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        neighbors = new Dictionary<Direction, RoomManager>();
+        door = new Dictionary<Direction, GameObject>();
+
+        string[] metaData = level[0].Split(',');
+        cols = int.Parse(metaData[0]);
+        rows = int.Parse(metaData[1]);
+
+        transform.position = new Vector3(-(cols / 2.0f), -(rows / 2.0f), transform.position.z);
 
         tileTypes = new Dictionary<string, GameObject>
         {
@@ -44,11 +79,13 @@ public class RoomManager : MonoBehaviour
                 if (levelData[c] == "0")
                     continue;
 
-                currentRow.Add(Instantiate(tileTypes[levelData[c]], grid.CellToWorld(new Vector3Int(Math.Map(r, 0, level.Length - 1, level.Length - 1, 0), c, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity));
+                currentRow.Add(Instantiate(tileTypes[levelData[c]], grid.CellToWorld(new Vector3Int(Math.Map(r, 0, level.Length - 1, level.Length - 1, 0), c, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
             }
         }
 
-        foreach(KeyValuePair<string, GameObject> keyValue in tileTypes)
+        
+
+        foreach (KeyValuePair<string, GameObject> keyValue in tileTypes)
         {
             Destroy(tileTypes[keyValue.Key]);
         }
@@ -58,5 +95,50 @@ public class RoomManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DrawDoor(Direction dir)
+    {
+        if(doorTile == null)
+        {
+            doorTile = (GameObject)Instantiate(Resources.Load("Door"));
+            doorTile.SetActive(false);
+        }
+
+        switch (dir)
+        {
+            case Direction.North:
+                door.Add(Direction.North, Instantiate(doorTile, grid.CellToWorld(new Vector3Int(rows, cols / 2, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
+                door[Direction.North].SetActive(true);
+                break;
+            case Direction.East:
+                door.Add(Direction.East, Instantiate(doorTile, grid.CellToWorld(new Vector3Int(rows / 2, cols, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
+                door[Direction.East].SetActive(true);
+                break;
+            case Direction.South:
+                door.Add(Direction.South, Instantiate(doorTile, grid.CellToWorld(new Vector3Int(-1, cols / 2, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
+                door[Direction.South].SetActive(true);
+                break;
+            case Direction.West:
+                door.Add(Direction.West, Instantiate(doorTile, grid.CellToWorld(new Vector3Int(rows / 2, -1, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
+                door[Direction.West].SetActive(true);
+                break;
+        }
+    }
+
+    public void SetNeighbor(Direction dir, RoomManager manager, bool drawDoor = true)
+    {
+        if(neighbors.ContainsKey(dir))
+            neighbors[dir] = manager;
+        else
+            neighbors.Add(dir, manager);
+
+        if(drawDoor)
+        {
+            DrawDoor(dir);
+
+            RoomTransition trans = door[dir].GetComponent<RoomTransition>();
+            trans.destination = manager;
+        }
     }
 }

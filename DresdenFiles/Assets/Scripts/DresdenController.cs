@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 using System;
 using UnityEngine;
 using quiet;
@@ -27,6 +28,9 @@ public class DresdenController : MonoBehaviour
 
 
     private float lastDash;
+    private Task dashTask;
+    private CancellationTokenSource dashCancel;
+    private float remainingDashDur;
     private Stamina stamina;
     private Health health;
 
@@ -34,6 +38,8 @@ public class DresdenController : MonoBehaviour
     /// Is Dresden currently dashing?
     /// </summary>
     public bool Dashing { get; private set; }
+
+    public bool Pause { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -56,12 +62,14 @@ public class DresdenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime;
-        transform.position = transform.position + movement * speed;
+        if(!Pause)
+        {
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime;
+            transform.position = transform.position + movement * speed;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-            Dash();
-
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                Dash();
+        }
     }
 
     private void Dash()
@@ -72,16 +80,43 @@ public class DresdenController : MonoBehaviour
             speed *= 2;
             Dashing = true;
             // Stop dashing after dash duration is complete
-            Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(t =>
+            dashCancel = new CancellationTokenSource();
+            dashTask = Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(t =>
             {
                 speed /= 2;
                 Dashing = false;
-            });
+            }, dashCancel.Token);
+            
         }
     }
 
     private void OnDeath(HealthEventData hed)
     {
         Debug.Log("Oh no! Dresden died to " + hed.Source);
+    }
+
+    public void SetPause(bool paused)
+    {
+        Pause = paused;
+        if (paused)
+        { 
+            if(dashTask.Status == TaskStatus.Running)
+            {
+                dashCancel.Cancel();
+                remainingDashDur = Time.time - lastDash;
+            }
+        } 
+        else
+        {
+            if(dashTask.Status == TaskStatus.Canceled)
+            {
+                dashCancel = new CancellationTokenSource();
+                dashTask = Task.Delay(TimeSpan.FromSeconds(remainingDashDur)).ContinueWith(t =>
+                {
+                    speed /= 2;
+                    Dashing = false;
+                }, dashCancel.Token);
+            }
+        }
     }
 }
