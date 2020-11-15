@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Spells : MonoBehaviour
 {
-    bool fire = false;
+    bool fire = true;
+    public Rigidbody fireBall;
+    private DresdenController d;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        d = GetComponent<DresdenController>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,9 @@ public class Spells : MonoBehaviour
             if(fire == true)
             {
                 FireBall ball = new FireBall();
+                Rigidbody clone;
+                clone = Instantiate(fireBall, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
+                clone.velocity = transform.TransformDirection(Vector3.right * 10);
             }
         }
 
