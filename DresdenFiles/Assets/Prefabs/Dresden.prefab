@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 241230075641256728}
   - component: {fileID: 2563984238503801321}
   - component: {fileID: 6694392122891811382}
+  - component: {fileID: 6439298714895832253}
   m_Layer: 0
   m_Name: Dresden
   m_TagString: Player
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd020429bb132946bdb094e0cd44864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireBall: {fileID: 0}
 --- !u!114 &2563984238503801321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +147,15 @@ MonoBehaviour:
   currentStamina: 0
   restoreRate: 10
   regenCooldown: 0.5
+--- !u!114 &6439298714895832253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6573918945606477698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fd57ca9d124bb47a68df7f9fa7b3ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
