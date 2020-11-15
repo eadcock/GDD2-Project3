@@ -50,13 +50,13 @@ public class DresdenController : MonoBehaviour
 
         health.OnDeath += OnDeath;
 
-        debugMode.debugActions += () =>
+        /*debugMode.debugActions += () =>
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
                 health.TakeDamage(debugMode.gameObject, 10);
             }
-        };
+        };*/
     }
 
     // Update is called once per frame
