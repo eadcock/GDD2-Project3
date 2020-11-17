@@ -35,16 +35,52 @@ public class DungeonManager : MonoBehaviour
         {
             { new Vector2(0, 0), currentRoom }
         };
-        while(currentNumRooms < numRooms)
+        /*Dictionary<RoomManager, Vector2> inverseMap = new Dictionary<RoomManager, Vector2>
         {
-            
+            { currentRoom, new Vector2(0, 0) }
+        };
+        while (currentNumRooms < numRooms)
+        {
+            RoomManager randomRoom = rooms[UnityEngine.Random.Range(0, rooms.Count - 1)];
+            currentPosition = inverseMap[randomRoom];
+            Direction? dir = GetRandomEmptyDirection(randomRoom);
+            Debug.Log(randomRoom + " | " + dir);
+            if (dir != null)
+            {
+                Direction randomDir = (Direction)dir;
+                if (map.ContainsKey(currentPosition + DirectionToVec2(randomDir)))
+                {
+                    ConnectRooms(currentRoom, randomDir, map[currentPosition + DirectionToVec2(randomDir)]);
+                    currentRoom = currentRoom[randomDir];
+                }
+                else
+                {
+                    RoomManager newRoom = Instantiate(roomPrefabs[0]).GetComponent<RoomManager>();
+                    rooms.Add(newRoom);
+                    map.Add(currentPosition + DirectionToVec2(randomDir), newRoom);
+                    inverseMap.Add(newRoom, currentPosition + DirectionToVec2(randomDir));
+                    newRoom.name = "Room " + currentNumRooms;
+
+                    ConnectRooms(currentRoom, randomDir, newRoom);
+                    MoveRoomRelativeTo(newRoom, randomDir, currentRoom);
+
+                    currentRoom = newRoom;
+                    currentNumRooms++;
+                }
+                currentPosition += DirectionToVec2(randomDir);
+            }
+        }*/
+        // weighted random algorithm
+        while (currentNumRooms < numRooms)
+        {
+
             Direction randomDir = GetRandomDirection(currentPosition);
             //Debug.Log(currentPosition + DirectionToVec2(randomDir));
             if (currentRoom.neighbors.ContainsKey(randomDir))
             {
                 currentRoom = currentRoom[randomDir];
             }
-            else if(map.ContainsKey(currentPosition + DirectionToVec2(randomDir)))
+            else if (map.ContainsKey(currentPosition + DirectionToVec2(randomDir)))
             {
                 Debug.Log("blep");
                 ConnectRooms(currentRoom, randomDir, map[currentPosition + DirectionToVec2(randomDir)]);
@@ -66,6 +102,28 @@ public class DungeonManager : MonoBehaviour
             currentPosition += DirectionToVec2(randomDir);
             //Debug.Log(currentPosition);
         }
+    }
+
+    public Direction? GetRandomEmptyDirection(RoomManager room)
+    {
+        List<Direction> directions = new List<Direction> { Direction.North, Direction.East, Direction.South, Direction.West };
+        Queue<Direction> randomizedDirections = new Queue<Direction>();
+        while(directions.Count > 0)
+        {
+            Direction randomDir = directions[UnityEngine.Random.Range(0, directions.Count - 1)];
+            directions.Remove(randomDir);
+            randomizedDirections.Enqueue(randomDir);
+            
+        }
+
+        while(randomizedDirections.Count > 0)
+        {
+            Direction dir = randomizedDirections.Dequeue();
+            if (!room.neighbors.ContainsKey(dir) || (room.neighbors.ContainsKey(dir) && room[dir] == null))
+                return dir;
+        }
+
+        return null;
     }
 
     public Direction GetRandomDirection(Vector2 pos)
@@ -177,7 +235,7 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    public RoomManager Move(GameObject door)
+    public (RoomManager, Direction) Move(GameObject door)
     {
         Vector3Int doorCell = currentRoom.grid.WorldToCell(door.transform.position);
         Direction? doorDir = null;
@@ -196,6 +254,6 @@ public class DungeonManager : MonoBehaviour
         }
 
         currentRoom = currentRoom[(Direction)doorDir];
-        return currentRoom;
+        return (currentRoom, (Direction)doorDir);
     }
 }

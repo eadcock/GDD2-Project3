@@ -25,31 +25,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[1]
-      value: g,o,g,o,g,o,g,o,g
+      value: o,o,o,o,g,o,o,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[2]
-      value: o,g,o,g,o,g,o,g,o
+      value: o,g,g,g,g,g,g,g,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[3]
-      value: g,o,g,o,g,o,g,o,g
+      value: o,g,g,g,g,g,g,g,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[4]
-      value: o,g,o,g,o,g,o,g,o
+      value: g,g,g,g,g,g,g,g,g
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[5]
-      value: g,o,g,o,g,o,g,o,g
+      value: o,g,g,g,g,g,g,g,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[6]
-      value: o,g,o,g,o,g,o,g,o
+      value: o,g,g,g,g,g,g,g,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[7]
-      value: g,o,g,o,g,o,g,o,g
+      value: o,o,o,o,g,o,o,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384835, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: m_Name
