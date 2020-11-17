@@ -33,6 +33,7 @@ public class DresdenController : MonoBehaviour
     private float remainingDashDur;
     private Stamina stamina;
     private Health health;
+    private Anim animator;
 
     private Rigidbody2D body;
 
@@ -50,6 +51,7 @@ public class DresdenController : MonoBehaviour
         stamina = GetComponent<Stamina>();
         health = GetComponent<Health>();
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Anim>();
 
         health.OnDeath += OnDeath;
 
@@ -70,6 +72,13 @@ public class DresdenController : MonoBehaviour
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
             body.MovePosition(transform.position + movement * speed * Time.deltaTime);
+
+            animator.SetBool("DownPressed", movement.y < 0);
+            animator.SetBool("UpPressed", movement.y > 0);
+            animator.SetBool("LeftPressed", movement.x < 0);
+            animator.SetBool("RightPressed", movement.x > 0);
+
+
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
                 Dash();
