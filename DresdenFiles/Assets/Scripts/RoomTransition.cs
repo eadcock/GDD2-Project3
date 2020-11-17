@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using quiet;
 
 public class RoomTransition : MonoBehaviour
 {
@@ -46,11 +47,13 @@ public class RoomTransition : MonoBehaviour
     {
         if(!moving)
         {
-            destination = dm.Move(gameObject);
+            Direction direction;
+            (destination, direction) = dm.Move(gameObject);
             moving = true;
             startMove = Time.time;
             endMove = Time.time + moveDuration;
             startPos = Camera.main.transform.position;
+            dc.transform.position += dm.DirectionToVec2(direction).FillZDim();
             dc.SetPause(true);
         }
     }

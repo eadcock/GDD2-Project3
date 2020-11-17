@@ -34,6 +34,8 @@ public class DresdenController : MonoBehaviour
     private Stamina stamina;
     private Health health;
 
+    private Rigidbody2D body;
+
     /// <summary>
     /// Is Dresden currently dashing?
     /// </summary>
@@ -47,6 +49,7 @@ public class DresdenController : MonoBehaviour
         lastDash = 0;
         stamina = GetComponent<Stamina>();
         health = GetComponent<Health>();
+        body = GetComponent<Rigidbody2D>();
 
         health.OnDeath += OnDeath;
 
@@ -60,12 +63,13 @@ public class DresdenController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!Pause)
         {
-            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime;
-            transform.position = transform.position + movement * speed;
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+
+            body.MovePosition(transform.position + movement * speed * Time.deltaTime);
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
                 Dash();
