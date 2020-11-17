@@ -18,7 +18,6 @@ public class Spells : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         //Select spell
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -30,9 +29,9 @@ public class Spells : MonoBehaviour
         }
 
         //Use spell
-        if (Input.GetMouseButtonDown(0))
+        if (!InputManager.isPaused && Input.GetMouseButtonDown(0))
         {
-            if(fire == true)
+            if (fire == true)
             {
                 FireBall ball = new FireBall();
                 Rigidbody clone;
