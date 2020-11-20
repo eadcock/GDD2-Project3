@@ -11,12 +11,12 @@ public class Gun : MonoBehaviour
     public Rigidbody bulletBody;
     private DresdenController d;
     Vector3 screenPos = new Vector3();
-     
+
     // Start is called before the first frame update
     void Start()
     {
         d = GetComponent<DresdenController>();
-        //screenPos = Camera.main.WorldToScreenPoint(bulletBody.position);
+        screenPos = Camera.main.WorldToScreenPoint(bulletBody.position);
     }
 
     // Update is called once per frame
@@ -27,16 +27,16 @@ public class Gun : MonoBehaviour
         {
             b = new Bullet();
             Rigidbody clone;
-            //clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
-            //clone.velocity = transform.TransformDirection(Vector3.right * 10);
+            clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
+            clone.velocity = transform.TransformDirection(Vector3.right * 10);
             bullets--;
         }
-        
-        if(bullets == 0)
+
+        if (bullets == 0)
         {
             reload -= Time.deltaTime;
         }
-        if(reload <=0)
+        if (reload <= 0)
         {
             bullets = 6;
             reload = 6;
