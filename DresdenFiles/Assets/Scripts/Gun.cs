@@ -6,38 +6,44 @@ public class Gun : MonoBehaviour
 {
 
     Bullet b = new Bullet();
-    public Rigidbody bullet;
+    int bullets = 6;
+    float reload = 6;
+    public Rigidbody bulletBody;
     private DresdenController d;
     Vector3 screenPos = new Vector3();
-
+     
     // Start is called before the first frame update
     void Start()
     {
         d = GetComponent<DresdenController>();
-        screenPos = Camera.main.WorldToScreenPoint(bullet.position);
+        //screenPos = Camera.main.WorldToScreenPoint(bulletBody.position);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && bullets != 0)
         {
             b = new Bullet();
             Rigidbody clone;
-            clone = Instantiate(bullet, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
-            clone.velocity = transform.TransformDirection(Vector3.right * 10);
-            /*if (clone.position.x > screenPos.x)
-            {
-                Destroy(clone);
-                Destroy(bullet);
-            }*/
+            //clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
+            //clone.velocity = transform.TransformDirection(Vector3.right * 10);
+            bullets--;
         }
         
-
+        if(bullets == 0)
+        {
+            reload -= Time.deltaTime;
+        }
+        if(reload <=0)
+        {
+            bullets = 6;
+            reload = 6;
+        }
 
     }
-}
+}//delegate d
 
 public class Bullet
 {

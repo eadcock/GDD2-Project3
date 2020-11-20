@@ -33,6 +33,9 @@ public class RoomManager : MonoBehaviour
     [Tooltip("g = walkable ground, o = obstacle, 0 = empty space")]
     private string[] level;
 
+    [SerializeField]
+    private string[] enemies;
+
     public Grid grid;
     public List<List<GameObject>> tiles;
 
@@ -83,11 +86,30 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        
+        Dictionary<string, GameObject> enemyTypes = new Dictionary<string, GameObject>
+        {
+            ["b"] = (GameObject)Instantiate(Resources.Load("Bat")),
+            ["g"] = (GameObject)Instantiate(Resources.Load("Goblin")),
+            ["h"] = (GameObject)Instantiate(Resources.Load("Human")),
+            ["k"] = (GameObject)Instantiate(Resources.Load("Kenku")),
+            ["p"] = (GameObject)Instantiate(Resources.Load("Practitioner")),
+            ["w"] = (GameObject)Instantiate(Resources.Load("Wolf"))
+        };
+
+        foreach(string enemy in enemies)
+        {
+            string[] enemyData = enemy.Split(',');
+            Instantiate(enemyTypes[enemyData[0]], grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), Quaternion.identity);
+        }
 
         foreach (KeyValuePair<string, GameObject> keyValue in tileTypes)
         {
             Destroy(tileTypes[keyValue.Key]);
+        }
+
+        foreach(KeyValuePair<string, GameObject> keyValue in enemyTypes)
+        {
+            Destroy(enemyTypes[keyValue.Key]);
         }
     }
 

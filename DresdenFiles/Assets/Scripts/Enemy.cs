@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
         speed = 5;
 
         // get other values
+        player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<Health>();
         pos = gameObject.transform.position;
         playerPos = player.transform.position;

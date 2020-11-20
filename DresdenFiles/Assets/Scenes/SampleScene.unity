@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283129662399475142, guid: e5a346f12555f7e43ad4db1f57059724, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4283129662399475142, guid: e5a346f12555f7e43ad4db1f57059724, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -452,11 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f0d991423afd84cb603118f1e379a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &1173013984 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 5626046314472209397, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
-  m_PrefabInstance: {fileID: 72169987}
-  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1588373124 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 7206918778510792018, guid: 0bab31f05c7cecd4593a1d999bec704c, type: 3}
@@ -604,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8910ad33c5fa276438db3b7de9377771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1173013984}
+  bulletBody: {fileID: 0}
 --- !u!1001 &421202263131285884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -677,6 +672,10 @@ PrefabInstance:
       propertyPath: fireBall
       value: 
       objectReference: {fileID: 1588373124}
+    - target: {fileID: 241230075641256728, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2939206899934170421, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2747939

@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
+      propertyPath: enemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: north
       value: 0
       objectReference: {fileID: 0}
@@ -50,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[7]
       value: o,o,o,o,g,o,o,o,o
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: g,1,0
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384835, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: m_Name
