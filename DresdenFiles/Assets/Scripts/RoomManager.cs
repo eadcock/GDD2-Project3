@@ -167,19 +167,19 @@ public class RoomManager : MonoBehaviour
     {
         for(int j = -1; j < Columns + 1; j++)
         {
-            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(Rows, j, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(Rows, j, 1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
         }
         for (int j = -1; j < Columns + 1; j++)
         {
-            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(-1, j, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(-1, j, 1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
         }
         for (int j = 0; j < Rows; j++)
         {
-            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, -1, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, -1, 1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
         }
         for (int j = 0; j < Rows; j++)
         {
-            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, Columns, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, Columns, 1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
         }
     }
 

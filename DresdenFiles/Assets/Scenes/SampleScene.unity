@@ -205,11 +205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283129662399475136, guid: e5a346f12555f7e43ad4db1f57059724, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4283129662399475137, guid: e5a346f12555f7e43ad4db1f57059724, type: 3}
       propertyPath: numRooms
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4283129662399475142, guid: e5a346f12555f7e43ad4db1f57059724, type: 3}
       propertyPath: m_LocalPosition.x

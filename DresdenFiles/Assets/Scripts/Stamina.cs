@@ -91,6 +91,7 @@ public class Stamina : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        regenTask.Wait();
+        if(regenTask != null && regenTask.Status == TaskStatus.Running)
+            regenTask.Wait();
     }
 }
