@@ -43,18 +43,21 @@ public class RoomTransition : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if(!moving)
+        if(col.gameObject.CompareTag("Player"))
         {
-            Direction direction;
-            (destination, direction) = dm.Move(gameObject);
-            moving = true;
-            startMove = Time.time;
-            endMove = Time.time + moveDuration;
-            startPos = Camera.main.transform.position;
-            dc.transform.position += dm.DirectionToVec2(direction).FillZDim();
-            dc.SetPause(true);
+            if(!moving && !dm.currentRoom.Locked)
+            {
+                Direction direction;
+                (destination, direction) = dm.Move(gameObject);
+                moving = true;
+                startMove = Time.time;
+                endMove = Time.time + moveDuration;
+                startPos = Camera.main.transform.position;
+                dc.transform.position += dm.DirectionToVec2(direction).FillZDim();
+                dc.SetPause(true);
+            }
         }
     }
 }

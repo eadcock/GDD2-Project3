@@ -253,7 +253,9 @@ public class DungeonManager : MonoBehaviour
             throw new Exception("That's not a door in this room.... where are you??");
         }
 
+        currentRoom.Active = false;
         currentRoom = currentRoom[(Direction)doorDir];
+        currentRoom.Activate();
         return (currentRoom, (Direction)doorDir);
     }
 }

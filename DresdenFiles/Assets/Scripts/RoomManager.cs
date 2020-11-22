@@ -36,10 +36,10 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private string[] enemies;
 
+    public List<GameObject> activeEnemies;
+
     public Grid grid;
     public List<List<GameObject>> tiles;
-
-    public Dictionary<string, GameObject> tileTypes;
 
     public Vector2 Center => grid.CellToWorld(new Vector3Int((cols / 2) - 1, (rows / 2) + 1, 0)) + new Vector3(0.5f, 0.5f, 0);
 
@@ -49,6 +49,13 @@ public class RoomManager : MonoBehaviour
     public int Columns => cols;
 
     private GameObject doorTile;
+
+    public bool Active { get; set; }
+    public bool Completed { get; set; }
+    public bool Locked { get; set; }
+
+    public Dictionary<string, GameObject> tileTypes;
+    public Dictionary<string, GameObject> enemyTypes;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,6 +69,8 @@ public class RoomManager : MonoBehaviour
 
         transform.position = new Vector3(-(cols / 2.0f), -(rows / 2.0f), transform.position.z);
 
+        grid = GetComponent<Grid>();
+
         tileTypes = new Dictionary<string, GameObject>
         {
             ["g"] = (GameObject)Instantiate(Resources.Load("Ground")),
@@ -69,7 +78,8 @@ public class RoomManager : MonoBehaviour
             //["f"] = (GameObject)Instantiate(Resources.Load("ShortObstacle")),
         };
 
-        grid = GetComponent<Grid>();
+        doorTile = (GameObject)Instantiate(Resources.Load("Door"));
+        doorTile.SetActive(false);
 
         tiles = new List<List<GameObject>>();
         for(int r = level.Length - 1; r >= 1; r--)
@@ -86,47 +96,95 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        Dictionary<string, GameObject> enemyTypes = new Dictionary<string, GameObject>
-        {
-            ["b"] = (GameObject)Instantiate(Resources.Load("Bat")),
-            ["g"] = (GameObject)Instantiate(Resources.Load("Goblin")),
-            ["h"] = (GameObject)Instantiate(Resources.Load("Human")),
-            ["k"] = (GameObject)Instantiate(Resources.Load("Kenku")),
-            ["p"] = (GameObject)Instantiate(Resources.Load("Practitioner")),
-            ["w"] = (GameObject)Instantiate(Resources.Load("Wolf"))
-        };
-
-        foreach(string enemy in enemies)
-        {
-            string[] enemyData = enemy.Split(',');
-            Instantiate(enemyTypes[enemyData[0]], grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), Quaternion.identity);
-        }
+        DrawWalls();
 
         foreach (KeyValuePair<string, GameObject> keyValue in tileTypes)
         {
-            Destroy(tileTypes[keyValue.Key]);
+            Destroy(keyValue.Value);
         }
 
-        foreach(KeyValuePair<string, GameObject> keyValue in enemyTypes)
-        {
-            Destroy(enemyTypes[keyValue.Key]);
-        }
+        Active = false;
+        Completed = false;
+        Locked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Active && !Completed)
+        {
+            if(activeEnemies.Count == 0)
+            {
+                Completed = true;
+                Locked = false;
+            }
+        }
+    }
+
+    public void Activate()
+    {
+        if(!Completed)
+        {
+            if(enemies.Length > 0)
+            {
+                enemyTypes = new Dictionary<string, GameObject>
+                {
+                    ["b"] = (GameObject)Instantiate(Resources.Load("Bat")),
+                    ["g"] = (GameObject)Instantiate(Resources.Load("Goblin")),
+                    ["h"] = (GameObject)Instantiate(Resources.Load("Human")),
+                    ["k"] = (GameObject)Instantiate(Resources.Load("Kenku")),
+                    ["p"] = (GameObject)Instantiate(Resources.Load("Practitioner")),
+                    ["w"] = (GameObject)Instantiate(Resources.Load("Wolf"))
+                };
+                foreach (KeyValuePair<string, GameObject> keyValue in enemyTypes)
+                {
+                    keyValue.Value.SetActive(false);
+                }
+
+                foreach (string enemy in enemies)
+                {
+                    string[] enemyData = enemy.Split(',');
+                    activeEnemies.Add(Instantiate(enemyTypes[enemyData[0]], grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), Quaternion.identity));
+                    activeEnemies[activeEnemies.Count - 1].SetActive(true);
+                }
+
+                Locked = true;
+
+                /*foreach (KeyValuePair<string, GameObject> keyValue in enemyTypes)
+                {
+                    Destroy(keyValue.Value);
+                }*/
+            } 
+            else
+            {
+                Locked = false;
+            }
+        }
+        Active = true;
+    }
+
+    public void DrawWalls()
+    {
+        for(int j = -1; j < Columns + 1; j++)
+        {
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(Rows, j, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+        }
+        for (int j = -1; j < Columns + 1; j++)
+        {
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(-1, j, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+        }
+        for (int j = 0; j < Rows; j++)
+        {
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, -1, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+        }
+        for (int j = 0; j < Rows; j++)
+        {
+            Instantiate(tileTypes["o"], grid.CellToWorld(new Vector3Int(j, Columns, -1)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform);
+        }
     }
 
     public void DrawDoor(Direction dir)
     {
-        if(doorTile == null)
-        {
-            doorTile = (GameObject)Instantiate(Resources.Load("Door"));
-            doorTile.SetActive(false);
-        }
-
         switch (dir)
         {
             case Direction.North:
