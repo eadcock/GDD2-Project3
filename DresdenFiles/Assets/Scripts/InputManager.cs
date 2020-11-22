@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using quiet;
-using System.Linq;
 
 public class InputManager : MonoBehaviour
 {
@@ -13,9 +11,6 @@ public class InputManager : MonoBehaviour
         endState
     }
     States currentState;
-
-    //public GameObject endPanel;
-    public GameObject pausePanel;
 
     public static bool isPaused = false;
 
@@ -47,34 +42,36 @@ public class InputManager : MonoBehaviour
 
     public void ChangeState(int newState)
     {
-        //Debug.Log(newState);
-        if (newState > 2)
-        {
-            return;
-        }
-
         currentState = (States)newState;
         if (newState < 1)
         {
             // play
             isPaused = false;
             Time.timeScale = 1;
-            pausePanel.SetActive(false);
         }
         else if (newState < 2)
         {
             // pause
             isPaused = true;
             Time.timeScale = 0;
-            pausePanel.SetActive(true);
         }
         else
         {
             // end
-
+            QuitGame();
         }
-        //pausePanel.SetActive(currentState == States.pauseState);
-        //endPanel.SetActive(currentState == States.endState);
+    }
+
+    private void OnGUI()
+    {
+        if (isPaused)
+        {
+            GUI.Box(new Rect(40, 40, Screen.width - 80, Screen.height - 80), "PAUSED");
+            if (GUI.Button(new Rect((Screen.width / 2) - 30, (Screen.height / 2) - 10, 60, 30), "Resume"))
+                ChangeState(0);
+            if (GUI.Button(new Rect((Screen.width / 2) - 30, (Screen.height / 2) + 30, 60, 30), "Quit"))
+                ChangeState(2);
+        }
     }
 
     public void QuitGame()
