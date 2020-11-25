@@ -27,6 +27,7 @@ public class Stamina : MonoBehaviour
     private float regenCooldown;
 
     private bool lockRegen;
+    private Task regenTask;
 
     /// <summary>
     /// used to keep track of regening stamina 0 > x < 1
@@ -75,7 +76,7 @@ public class Stamina : MonoBehaviour
             if(regenCooldown > 0)
             {
                 lockRegen = true;
-                Task.Delay(TimeSpan.FromSeconds(regenCooldown)).ContinueWith(t => lockRegen = false);
+                regenTask = Task.Delay(TimeSpan.FromSeconds(regenCooldown)).ContinueWith(t => lockRegen = false);
             }
             return true;
         }
@@ -87,4 +88,10 @@ public class Stamina : MonoBehaviour
     /// </summary>
     /// <param name="amount"></param>
     public void AddStamina(int amount) => CurrentStamina += amount;
+
+    public void OnApplicationQuit()
+    {
+        if(regenTask != null && regenTask.Status == TaskStatus.Running)
+            regenTask.Wait();
+    }
 }

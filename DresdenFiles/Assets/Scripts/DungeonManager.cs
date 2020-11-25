@@ -128,7 +128,7 @@ public class DungeonManager : MonoBehaviour
 
     public Direction GetRandomDirection(Vector2 pos)
     {
-        Dictionary<Direction, int> weights = new Dictionary<Direction, int>
+        Dictionary<Direction, float> weights = new Dictionary<Direction, float>
         {
             { Direction.North, 1 },
             { Direction.South, 1 },
@@ -137,24 +137,33 @@ public class DungeonManager : MonoBehaviour
         };
         if(pos.y < 0)
         {
-            weights[Direction.North] += Mathf.RoundToInt(2f * pos.y);
+            weights[Direction.South] -= 0.1f * pos.y;
+            if (weights[Direction.South] < 0)
+                weights[Direction.South] = 0;
         }
         if(pos.y > 0)
         {
-            weights[Direction.South] += Mathf.RoundToInt(2f * Math.Abs(pos.y));
+            weights[Direction.North] -= 0.1f * Math.Abs(pos.y);
+            if (weights[Direction.North] < 0)
+                weights[Direction.North] = 0;
         }
         if(pos.x < 0)
         {
-            weights[Direction.East] += Mathf.RoundToInt(2f * pos.x);
+            weights[Direction.West] -= 0.1f * pos.x;
+            if (weights[Direction.West] < 0)
+                weights[Direction.West] = 0;
         }
         if(pos.x > 0)
         {
-            weights[Direction.West] += Mathf.RoundToInt(2f * Math.Abs(pos.x));
+            weights[Direction.East] -= 0.1f * Math.Abs(pos.x);
+            if (weights[Direction.East] < 0)
+                weights[Direction.East] = 0;
+
         }
 
-        int sum = weights[Direction.North] + weights[Direction.South] + weights[Direction.East] + weights[Direction.West];
+        float sum = weights[Direction.North] + weights[Direction.South] + weights[Direction.East] + weights[Direction.West];
 
-        int random = UnityEngine.Random.Range(0, sum - 1);
+        float random = UnityEngine.Random.Range(0, sum - 1);
         for(int i = 0; i < 4; i++)
         {
             if (random < weights[(Direction)i])
@@ -253,7 +262,9 @@ public class DungeonManager : MonoBehaviour
             throw new Exception("That's not a door in this room.... where are you??");
         }
 
+        currentRoom.Active = false;
         currentRoom = currentRoom[(Direction)doorDir];
+        currentRoom.Activate();
         return (currentRoom, (Direction)doorDir);
     }
 }

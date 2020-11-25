@@ -94,11 +94,11 @@ public class DresdenController : MonoBehaviour
             Dashing = true;
             // Stop dashing after dash duration is complete
             dashCancel = new CancellationTokenSource();
-            dashTask = Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(t =>
+            /*dashTask = Task.Delay(TimeSpan.FromSeconds(dashDuration)).ContinueWith(t =>
             {
                 speed /= 2;
                 Dashing = false;
-            }, dashCancel.Token);
+            }, dashCancel.Token);*/
             
         }
     }
@@ -113,15 +113,15 @@ public class DresdenController : MonoBehaviour
         Pause = paused;
         if (paused)
         { 
-            if(dashTask.Status == TaskStatus.Running)
+            /*if(dashTask.Status == TaskStatus.Running)
             {
                 dashCancel.Cancel();
                 remainingDashDur = Time.time - lastDash;
-            }
+            }*/
         } 
         else
         {
-            if(dashTask.Status == TaskStatus.Canceled)
+            /*if(dashTask.Status == TaskStatus.Canceled)
             {
                 dashCancel = new CancellationTokenSource();
                 dashTask = Task.Delay(TimeSpan.FromSeconds(remainingDashDur)).ContinueWith(t =>
@@ -129,7 +129,7 @@ public class DresdenController : MonoBehaviour
                     speed /= 2;
                     Dashing = false;
                 }, dashCancel.Token);
-            }
+            }*/
         }
     }
 }
