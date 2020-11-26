@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     Bullet b = new Bullet();
     int bullets = 6;
     float reload = 6;
+    float angle;
+    private Vector2 currentMousePosition;
     public Rigidbody bulletBody;
     private DresdenController d;
     Vector3 screenPos = new Vector3();
@@ -22,13 +24,18 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Find mouse angle
+        currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float y = currentMousePosition.y - d.transform.position.y;
+        float x = currentMousePosition.x - d.transform.position.x;
+        angle = Mathf.Atan2(y, x);
 
         if (Input.GetKeyDown(KeyCode.Space) && bullets != 0)
         {
             b = new Bullet();
             Rigidbody clone;
-            clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
-            clone.velocity = transform.TransformDirection(Vector3.right * 10);
+            clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
+            clone.velocity = (transform.TransformDirection(Mathf.Cos(angle), Mathf.Sin(angle), 0)) * 10;
             bullets--;
         }
 
