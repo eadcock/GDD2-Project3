@@ -122,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBall: {fileID: 0}
   lightningBolt: {fileID: 0}
+  cloneBody: {fileID: 0}
+  floodCircle: {fileID: 0}
 --- !u!114 &2563984238503801321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +176,7 @@ Animator:
   m_GameObject: {fileID: 6573918945606477698}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 957d5ef0da89a25459dc5af573ccd628, type: 2}
+  m_Controller: {fileID: 9100000, guid: 333257c777f81134fae46cd667278b4e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

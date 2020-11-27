@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2386884982670012436}
   - component: {fileID: 7091422606635325380}
   - component: {fileID: 3466215919765299469}
+  - component: {fileID: -3810402976730932295}
   m_Layer: 0
   m_Name: Practitioner
   m_TagString: Untagged
@@ -131,3 +132,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-3810402976730932295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571739357654957922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1280398d7356ad147983d8dadeafe4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

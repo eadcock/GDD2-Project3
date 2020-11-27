@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         playerPos = player.transform.position;
 
         animator = GetComponent<Anim>();
-        animator.SetBool("Moving", true);
+        animator.SetBool("Walking", true);
     }
 
     // Update is called once per frame

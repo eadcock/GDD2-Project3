@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6664458737353567708}
   - component: {fileID: 4004806557354027929}
   - component: {fileID: 6586387473069894610}
+  - component: {fileID: 4713215192280400341}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -131,3 +132,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4713215192280400341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644473000266227976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1280398d7356ad147983d8dadeafe4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
