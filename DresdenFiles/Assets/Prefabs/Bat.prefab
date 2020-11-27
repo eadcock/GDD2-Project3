@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 918823321413159252}
   - component: {fileID: 7339721973166593071}
   - component: {fileID: 5652232014194742306}
-  - component: {fileID: -6340701018034378895}
+  - component: {fileID: 6408832782591974394}
+  - component: {fileID: 3396534252515177964}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -112,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
---- !u!95 &-6340701018034378895
+--- !u!95 &6408832782591974394
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ Animator:
   m_GameObject: {fileID: 7792789860760124736}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5841e71c9f4fe54385e6fa72e46a3c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -131,3 +132,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3396534252515177964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792789860760124736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1280398d7356ad147983d8dadeafe4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

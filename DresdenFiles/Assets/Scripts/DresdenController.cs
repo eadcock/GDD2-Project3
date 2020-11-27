@@ -54,6 +54,7 @@ public class DresdenController : MonoBehaviour
         animator = GetComponent<Anim>();
 
         health.OnDeath += OnDeath;
+        health.OnDeath += animator.OnDeath;
 
         /*debugMode.debugActions += () =>
         {

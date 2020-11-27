@@ -28,4 +28,9 @@ public class Anim : MonoBehaviour
     {
         anim.SetBool(name, value);
     }
+
+    public void OnDeath(HealthEventData hed)
+    {
+        ActivateTrigger("Die");
+    }
 }
