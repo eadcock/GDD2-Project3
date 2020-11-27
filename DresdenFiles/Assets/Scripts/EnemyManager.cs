@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     private System.Random rng;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rng = new System.Random();
     }

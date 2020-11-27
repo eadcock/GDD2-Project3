@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     protected Vector3 pos;
     protected Vector3 playerPos;
 
-    Anim animator;
+    protected Anim animator;
 
     // Start is called before the first frame update
     protected virtual void Start()
