@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     protected Vector3 pos;
     protected Vector3 playerPos;
 
-    Anim animator;
+    protected Anim animator;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         playerPos = player.transform.position;
 
         animator = GetComponent<Anim>();
-        animator.SetBool("Moving", true);
+        animator.SetBool("Walking", true);
     }
 
     // Update is called once per frame

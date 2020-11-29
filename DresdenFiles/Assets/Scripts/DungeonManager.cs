@@ -15,6 +15,8 @@ public class DungeonManager : MonoBehaviour
 
     public int numRooms;
 
+    public EnemyManager enemies;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +100,8 @@ public class DungeonManager : MonoBehaviour
 
                 currentRoom = newRoom;
                 currentNumRooms++;
+
+                enemies.CreateEnemy(currentPosition);
             }
             currentPosition += DirectionToVec2(randomDir);
             //Debug.Log(currentPosition);
