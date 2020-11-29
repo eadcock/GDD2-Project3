@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: enemies.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: north
@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[1]
-      value: o,o,o,o,g,o,o,o,o
+      value: o,o,g,g,g,g,g,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[2]
@@ -37,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[3]
-      value: o,g,g,g,g,g,g,g,o
+      value: g,g,o,g,g,g,o,g,g
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[4]
@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[5]
-      value: o,g,g,g,g,g,g,g,o
+      value: g,g,o,g,g,g,o,g,g
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[6]
@@ -53,11 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[7]
-      value: o,o,o,o,g,o,o,o,o
+      value: o,o,g,g,g,g,g,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: enemies.Array.data[0]
-      value: 
+      value: b,1,1
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384835, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: m_Name

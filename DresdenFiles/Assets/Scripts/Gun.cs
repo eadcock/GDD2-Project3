@@ -5,12 +5,12 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
-    Bullet b = new Bullet();
+    public Bullet b = new Bullet();
     int bullets = 6;
     float reload = 6;
     float angle;
     private Vector2 currentMousePosition;
-    public Rigidbody bulletBody;
+    public Rigidbody2D bulletBody;
     private DresdenController d;
     Vector3 screenPos = new Vector3();
 
@@ -33,9 +33,10 @@ public class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && bullets != 0)
         {
             b = new Bullet();
-            Rigidbody clone;
+            Rigidbody2D clone;
             clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
             clone.velocity = (transform.TransformDirection(Mathf.Cos(angle), Mathf.Sin(angle), 0)) * 10;
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), clone.GetComponent<Collider2D>());
             bullets--;
         }
 
@@ -54,6 +55,7 @@ public class Gun : MonoBehaviour
 
 public class Bullet
 {
+    public static int Damage = 15;
     int damage;
     bool active;
     float x;
@@ -65,11 +67,6 @@ public class Bullet
         active = true;
         x = 0;
         y = 0;
-    }
-
-    public int Damage
-    {
-        get { return damage; }
     }
 
     public bool Active

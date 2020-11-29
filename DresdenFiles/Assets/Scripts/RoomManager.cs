@@ -55,7 +55,8 @@ public class RoomManager : MonoBehaviour
     public bool Locked { get; set; }
 
     public Dictionary<string, GameObject> tileTypes;
-    public Dictionary<string, GameObject> enemyTypes;
+
+    public EnemyManager enemyManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -106,61 +107,45 @@ public class RoomManager : MonoBehaviour
         Active = false;
         Completed = false;
         Locked = false;
+
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Active && !Completed)
-        {
-            if(activeEnemies.Count == 0)
-            {
-                Completed = true;
-                Locked = false;
-            }
-        }
+        
     }
 
     public void Activate()
     {
-        if(!Completed)
+        if (!Completed)
         {
-            if(enemies.Length > 0)
+            if (enemies.Length > 0)
             {
-                enemyTypes = new Dictionary<string, GameObject>
-                {
-                    ["b"] = (GameObject)Instantiate(Resources.Load("Bat")),
-                    ["g"] = (GameObject)Instantiate(Resources.Load("Goblin")),
-                    ["h"] = (GameObject)Instantiate(Resources.Load("Human")),
-                    ["k"] = (GameObject)Instantiate(Resources.Load("Kenku")),
-                    ["p"] = (GameObject)Instantiate(Resources.Load("Practitioner")),
-                    ["w"] = (GameObject)Instantiate(Resources.Load("Wolf"))
-                };
-                foreach (KeyValuePair<string, GameObject> keyValue in enemyTypes)
-                {
-                    keyValue.Value.SetActive(false);
-                }
-
                 foreach (string enemy in enemies)
                 {
                     string[] enemyData = enemy.Split(',');
-                    activeEnemies.Add(Instantiate(enemyTypes[enemyData[0]], grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), Quaternion.identity));
-                    activeEnemies[activeEnemies.Count - 1].SetActive(true);
+                    enemyManager.CreateEnemy(grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), enemyData[0]);
+                    
                 }
 
+                enemyManager.OnClear = OnClear;
                 Locked = true;
-
-                /*foreach (KeyValuePair<string, GameObject> keyValue in enemyTypes)
-                {
-                    Destroy(keyValue.Value);
-                }*/
             } 
             else
             {
                 Locked = false;
+                Completed = true;
             }
         }
         Active = true;
+    }
+
+    public void OnClear()
+    {
+        Completed = true;
+        Locked = false;
     }
 
     public void DrawWalls()

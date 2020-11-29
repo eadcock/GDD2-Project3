@@ -142,17 +142,13 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5626046314472209397, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7169768595224945726, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7169768595224945726, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.38
+      value: -10.22
       objectReference: {fileID: 0}
     - target: {fileID: 7169768595224945726, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -192,11 +188,70 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
---- !u!54 &72169988 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 5626046314472209397, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
+--- !u!1 &251957566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5073048082006937722, guid: adbd2995b93916d428b7687ea8208cc0, type: 3}
   m_PrefabInstance: {fileID: 72169987}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &251957569
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251957566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
+--- !u!50 &251957570
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251957566}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &251957571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251957566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698b824405892504998364a8ded30544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &274878628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,6 +551,7 @@ MonoBehaviour:
   - {fileID: 4103220005606148081, guid: 2cfe4df4153668c42b6e3603e2e9017d, type: 3}
   - {fileID: 2571739357654957922, guid: d3e60a7eeedfb7d40b34c4c6202cd37e, type: 3}
   - {fileID: 1644473000266227976, guid: 8d3a922c911995346abe230c72c3f439, type: 3}
+  enemies: []
 --- !u!4 &1668287044
 Transform:
   m_ObjectHideFlags: 0
@@ -532,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8910ad33c5fa276438db3b7de9377771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletBody: {fileID: 72169988}
+  bulletBody: {fileID: 251957570}
 --- !u!1001 &421202263131285884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -720,6 +776,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 120652613731176282, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 241230075641256728, guid: 41debaee0fd5a5444889878a9a04b6e6, type: 3}
       propertyPath: fireBall
       value: 

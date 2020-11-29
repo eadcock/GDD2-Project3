@@ -101,7 +101,7 @@ public class DungeonManager : MonoBehaviour
                 currentRoom = newRoom;
                 currentNumRooms++;
 
-                enemies.CreateEnemy(currentPosition);
+                //enemies.CreateEnemy(currentPosition);
             }
             currentPosition += DirectionToVec2(randomDir);
             //Debug.Log(currentPosition);
