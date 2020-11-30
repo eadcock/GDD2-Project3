@@ -56,6 +56,8 @@ public class DresdenController : MonoBehaviour
         health.OnDeath += OnDeath;
         health.OnDeath += animator.OnDeath;
 
+        health.OnDamage += hed => Debug.Log($"Dresden took {hed.Damage} damage from {hed.Source}");
+
         /*debugMode.debugActions += () =>
         {
             if(Input.GetKeyDown(KeyCode.E))

@@ -14,6 +14,7 @@ public class BatEnemy : Enemy
         damage = 7;
         attackCooldown = 0.0f;
         speed = 2;
+        GetComponent<Pathfinding.AILerp>().speed = speed;
     }
 
     // Update is called once per frame

@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     protected Vector3 pos;
     protected Vector3 playerPos;
     protected Gun gun;
+    protected new Rigidbody2D rigidbody;
 
     protected Anim animator;
 
@@ -37,12 +38,16 @@ public class Enemy : MonoBehaviour
         pos = gameObject.transform.position;
         playerPos = player.transform.position;
         gun = player.GetComponent<Gun>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
         animator = GetComponent<Anim>();
         animator.SetBool("Walking", true);
 
         // Destroy on death
         GetComponent<Health>().OnDeath += hed => FindObjectOfType<EnemyManager>().DestroyEnemy(gameObject);
+
+        GetComponent<Pathfinding.AIDestinationSetter>().target = player.transform;
+        GetComponent<Pathfinding.AILerp>().speed = speed;
     }
 
     // Update is called once per frame
@@ -52,7 +57,7 @@ public class Enemy : MonoBehaviour
         if (quiet.Collision.BoundingCircle(gameObject.transform.position, viewRange, player.transform.position, 1.0f))
         {
             // move towards player
-            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, player.transform.position, speed * Time.deltaTime).FillDim(Dimension.Z, -2);
+            // rigidbody.MovePosition(Vector2.MoveTowards(gameObject.transform.position, player.transform.position, speed * Time.deltaTime).FillDim(Dimension.Z, -2));
             // check if cooldown is over and player is within attack range
             if (attackCooldown <= 0.0f && 
                 quiet.Collision.BoundingCircle(gameObject.transform.position, attackRange, player.transform.position, 1.0f))

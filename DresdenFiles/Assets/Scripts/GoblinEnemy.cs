@@ -13,6 +13,7 @@ public class GoblinEnemy : Enemy
         attackRange = 0.4f;
         damage = 10;
         speed = 2;
+        GetComponent<Pathfinding.AILerp>().speed = speed;
     }
 
     // Update is called once per frame

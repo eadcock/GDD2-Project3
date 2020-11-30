@@ -8,8 +8,7 @@ public class BulletCollisionHandler : MonoBehaviour
     {
         if(!collision.gameObject.CompareTag("Player"))
         {
-            Health collisionHealth;
-            if (collision.gameObject.TryGetComponent(out collisionHealth))
+            if (collision.gameObject.TryGetComponent(out Health collisionHealth))
             {
                 collisionHealth.TakeDamage(gameObject, Bullet.Damage);
             }
@@ -22,6 +21,11 @@ public class BulletCollisionHandler : MonoBehaviour
     {
         if(!collision.gameObject.CompareTag("Player"))
         {
+            if (collision.gameObject.TryGetComponent(out Health collisionHealth))
+            {
+                collisionHealth.TakeDamage(gameObject, Bullet.Damage);
+            }
+
             Destroy(gameObject);
         }
     }

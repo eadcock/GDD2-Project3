@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -45,8 +46,19 @@ public class EnemyManager : MonoBehaviour
     {
         GameObject newEnemy = Instantiate(enemyTypes[enemyCode], new Vector3(pos.x, pos.y, -1.9f), Quaternion.identity);
         enemies.Add(newEnemy);
-        newEnemy.SetActive(true);
-        Debug.Log(newEnemy.transform.position);
+    }
+
+    public void ActivateEnemies() 
+    {
+        enemies.ForEach(e => e.SetActive(true));
+    }
+
+    public void DestroyAllEnemies()
+    {
+        while(enemies.Count > 0)
+        {
+            Destroy(enemies[0]);
+        }
     }
 
     public void DestroyEnemy(GameObject enemy)

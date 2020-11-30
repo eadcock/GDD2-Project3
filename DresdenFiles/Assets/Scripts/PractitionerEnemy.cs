@@ -13,6 +13,7 @@ public class PractitionerEnemy : Enemy
         attackRange = 0.4f;
         damage = 15;
         speed = 2;
+        GetComponent<Pathfinding.AILerp>().speed = speed;
     }
 
     // Update is called once per frame

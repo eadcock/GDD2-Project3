@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
 
     public Bullet b = new Bullet();
     int bullets = 6;
-    float reload = 6;
+    float reload = 1.5f;
     float angle;
     private Vector2 currentMousePosition;
     public Rigidbody2D bulletBody;
@@ -36,6 +36,7 @@ public class Gun : MonoBehaviour
             Rigidbody2D clone;
             clone = Instantiate(bulletBody, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
             clone.velocity = (transform.TransformDirection(Mathf.Cos(angle), Mathf.Sin(angle), 0)) * 10;
+            // Ignore collisions between bullets and the player
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), clone.GetComponent<Collider2D>());
             bullets--;
         }
@@ -47,9 +48,9 @@ public class Gun : MonoBehaviour
         if (reload <= 0)
         {
             bullets = 6;
-            reload = 6;
+            reload = 1.5f;
         }
-
+        Debug.Log(reload);
     }
 }//delegate d
 

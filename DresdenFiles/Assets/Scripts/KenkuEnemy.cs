@@ -13,6 +13,7 @@ public class KenkuEnemy : Enemy
         attackRange = 0.2f;
         damage = 15;
         speed = 3;
+        GetComponent<Pathfinding.AILerp>().speed = speed;
     }
 
     // Update is called once per frame

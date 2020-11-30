@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using quiet;
+using System.Linq;
+using UnityEditor.AI;
 
 public enum Direction
 {
@@ -93,7 +95,18 @@ public class RoomManager : MonoBehaviour
                 if (levelData[c] == "0")
                     continue;
 
-                currentRow.Add(Instantiate(tileTypes[levelData[c]], grid.CellToWorld(new Vector3Int(Math.Map(r, 0, level.Length - 1, level.Length - 1, 0), c, 0)) + new Vector3(0.5f, 0.5f, 0), Quaternion.identity, gameObject.transform));
+                currentRow.Add(
+                    Instantiate(tileTypes[levelData[c]], 
+                    (grid.CellToWorld(
+                        new Vector3Int(
+                            Math.Map(r, 0, level.Length - 1, level.Length - 1, 0), c, 0)
+                        ) 
+                        + new Vector3(0.5f, 0.5f, 0)
+                    ).Replace(0.1f, Dimension.Z), 
+                    Quaternion.identity, 
+                    gameObject.transform
+                    )
+                );
             }
         }
 
@@ -109,6 +122,11 @@ public class RoomManager : MonoBehaviour
         Locked = false;
 
         enemyManager = FindObjectOfType<EnemyManager>();
+
+        BoxCollider collider = GetComponent<BoxCollider>();
+        collider.size = new Vector2(grid.cellSize.x * Columns, grid.cellSize.y * Rows);
+
+        NavMeshBuilder.BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -126,7 +144,27 @@ public class RoomManager : MonoBehaviour
                 foreach (string enemy in enemies)
                 {
                     string[] enemyData = enemy.Split(',');
-                    enemyManager.CreateEnemy(grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), enemyData[0]);
+                    string enemyType = enemyData[0];
+                    string chosenEnemy = enemyData[0];
+                    if(enemyType.Length > 0)
+                    {
+                        string[] enemyVarients = enemyType.Split('/');
+                        if(enemyVarients.Length > 1)
+                        {
+                            List<string> e = new List<string>();
+                            List<float> chance = new List<float>();
+                            for(int i = 0; i < enemyVarients.Length; i += 1)
+                            {
+                                string[] chanceData = enemyVarients[i].Split('?');
+                                e.Add(chanceData[0]);
+                                chance.Add(int.Parse(chanceData[1]));
+                            }
+
+                            chosenEnemy = WeightedRandomEnemy(e.ToArray(), chance.ToArray());
+                        }
+                    }
+                    if(chosenEnemy != "0")
+                        enemyManager.CreateEnemy(grid.CellToWorld(new Vector3Int(int.Parse(enemyData[2]), int.Parse(enemyData[1]), 0)) + (grid.cellSize.StripZ() / 2), chosenEnemy);
                     
                 }
 
@@ -140,6 +178,26 @@ public class RoomManager : MonoBehaviour
             }
         }
         Active = true;
+    }
+
+    public string WeightedRandomEnemy(string[] enemies, float[] weights)
+    {
+        if(enemies.Length == 0)
+            return "";
+        else if (enemies.Length == 1)
+            return enemies[0];
+
+        float sum = weights.Aggregate((a, b) => a + b);
+
+        float random = UnityEngine.Random.Range(0, sum);
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (random < weights[i])
+                return enemies[i];
+            random -= weights[i];
+        }
+        Debug.LogWarning("Defaulted");
+        return enemies[0];
     }
 
     public void OnClear()

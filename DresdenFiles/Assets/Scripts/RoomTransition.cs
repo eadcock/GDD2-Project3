@@ -39,6 +39,7 @@ public class RoomTransition : MonoBehaviour
                 moving = false;
                 // REPLACE THIS WITH A POPER PAUSE SYSTEM            
                 dc.SetPause(false);
+                FindObjectOfType<EnemyManager>().ActivateEnemies();
             }
         }
     }
