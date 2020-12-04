@@ -84,13 +84,12 @@ public class DungeonManager : MonoBehaviour
             }
             else if (map.ContainsKey(currentPosition + DirectionToVec2(randomDir)))
             {
-                Debug.Log("blep");
                 ConnectRooms(currentRoom, randomDir, map[currentPosition + DirectionToVec2(randomDir)]);
                 currentRoom = currentRoom[randomDir];
             }
             else
             {
-                RoomManager newRoom = Instantiate(roomPrefabs[0]).GetComponent<RoomManager>();
+                RoomManager newRoom = Instantiate(roomPrefabs[1]).GetComponent<RoomManager>();
                 rooms.Add(newRoom);
                 map.Add(currentPosition + DirectionToVec2(randomDir), newRoom);
                 newRoom.name = "Room " + currentNumRooms;
@@ -106,6 +105,22 @@ public class DungeonManager : MonoBehaviour
             currentPosition += DirectionToVec2(randomDir);
             //Debug.Log(currentPosition);
         }
+
+        // Build boss room
+        Direction? direction = GetRandomEmptyDirection(currentRoom);
+        while(direction == null)
+        {
+            currentPosition += DirectionToVec2(GetRandomDirection(currentPosition));
+            currentRoom = map[currentPosition];
+            direction = GetRandomEmptyDirection(currentRoom);
+        }
+        RoomManager bossRoom = Instantiate(roomPrefabs[0]).GetComponent<RoomManager>();
+        rooms.Add(bossRoom);
+        map.Add(currentPosition + DirectionToVec2((Direction)direction), bossRoom);
+        bossRoom.name = "Boss Room";
+
+        ConnectRooms(currentRoom, (Direction)direction, bossRoom);
+        MoveRoomRelativeTo(bossRoom, (Direction)direction, currentRoom);
     }
 
     public Direction? GetRandomEmptyDirection(RoomManager room)

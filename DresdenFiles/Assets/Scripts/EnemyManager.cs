@@ -28,7 +28,8 @@ public class EnemyManager : MonoBehaviour
             ["h"] = (GameObject)Instantiate(Resources.Load("Enemies/Human")),
             ["k"] = (GameObject)Instantiate(Resources.Load("Enemies/Kenku")),
             ["p"] = (GameObject)Instantiate(Resources.Load("Enemies/Practitioner")),
-            ["w"] = (GameObject)Instantiate(Resources.Load("Enemies/Wolf"))
+            ["w"] = (GameObject)Instantiate(Resources.Load("Enemies/Wolf")),
+            //["B"] = (GameObject)Instantiate(Resources.Load("Enemies/Boss"))
         };
         foreach (KeyValuePair<string, GameObject> keyValue in enemyTypes)
         {
