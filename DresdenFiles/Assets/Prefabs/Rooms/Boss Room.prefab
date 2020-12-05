@@ -13,15 +13,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
       propertyPath: level.Array.data[3]
-      value: g,g,g,g,g,g,g,g,g
+      value: g/tr,g/0,g/0,g/0,g/0,g/0,g/0,g/0,g/tl
       objectReference: {fileID: 0}
     - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
       propertyPath: level.Array.data[5]
-      value: g,g,g,g,g,g,g,g,g
+      value: g/br,g/0,g/0,g/0,g/0,g/0,g/0,g/0,g/bl
       objectReference: {fileID: 0}
     - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
       propertyPath: enemies.Array.data[0]
       value: b,5,4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
+      propertyPath: level.Array.data[1]
+      value: o,o,g/tr,g/t,g/0,g/t,g/tl,o,o
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
+      propertyPath: level.Array.data[2]
+      value: o,g/tr,g/0,g/0,g/0,g/0,g/0,g/tl,o
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
+      propertyPath: level.Array.data[4]
+      value: g/0,g/0,g/0,g/0,g/0,g/0,g/0,g/0,g/0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
+      propertyPath: level.Array.data[6]
+      value: o,g/br,g/0,g/0,g/0,g/0,g/0,g/bl,o
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312926108394220933, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
+      propertyPath: level.Array.data[7]
+      value: o,o,g/br,g/b,g/0,g/b,g/bl,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1312926108394220936, guid: 92300f6dad4bc7b44b226ef64caf1da6, type: 3}
       propertyPath: m_LocalPosition.x

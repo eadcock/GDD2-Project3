@@ -38,6 +38,11 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private string[] enemies;
 
+    [SerializeField]
+    private Sprite[] groundSprites;
+    [SerializeField]
+    private Sprite[] obstacleSprites;
+
     public List<GameObject> activeEnemies;
 
     public Grid grid;
@@ -81,6 +86,21 @@ public class RoomManager : MonoBehaviour
             //["f"] = (GameObject)Instantiate(Resources.Load("ShortObstacle")),
         };
 
+        Dictionary<string, Sprite> lookUpGroundSprite = new Dictionary<string, Sprite>
+        {
+            ["tr"] = groundSprites[0],
+            ["t"] = groundSprites[1],
+            ["tl"] = groundSprites[2],
+            ["r"] = groundSprites[3],
+            ["0"] = groundSprites[4],
+            ["l"] = groundSprites[5],
+            ["br"] = groundSprites[6],
+            ["b"] = groundSprites[7],
+            ["bl"] = groundSprites[8],
+            ["rl"] = groundSprites[9],
+            ["tb"] = groundSprites[10]
+        };
+
         doorTile = (GameObject)Instantiate(Resources.Load("Door"));
         doorTile.SetActive(false);
 
@@ -95,8 +115,18 @@ public class RoomManager : MonoBehaviour
                 if (levelData[c] == "0")
                     continue;
 
+                string spriteIndex = "0";
+                string type = levelData[c];
+                Debug.Log(levelData[c]);
+                if(levelData[c].Length > 1)
+                {
+                    string[] levelMetaData = levelData[c].Split('/');
+                    spriteIndex = levelMetaData[1];
+                    type = levelMetaData[0];
+                }
+
                 currentRow.Add(
-                    Instantiate(tileTypes[levelData[c]], 
+                    Instantiate(tileTypes[type], 
                     (grid.CellToWorld(
                         new Vector3Int(
                             Math.Map(r, 0, level.Length - 1, level.Length - 1, 0), c, 0)
@@ -107,6 +137,37 @@ public class RoomManager : MonoBehaviour
                     gameObject.transform
                     )
                 );
+
+                if (type == "g")
+                    currentRow[currentRow.Count - 1].GetComponent<SpriteRenderer>().sprite = lookUpGroundSprite[spriteIndex];
+                else
+                    currentRow[currentRow.Count - 1].GetComponent<SpriteRenderer>().sprite = obstacleSprites[0];
+            }
+        }
+
+        for(int i = 0; i < tiles.Count; i++)
+        {
+            for(int j = 0; j < tiles[i].Count; j++)
+            {
+                string neighborString = "";
+                if(i - 1 >= 0 && tiles[i - 1][j].CompareTag("Obstacle"))
+                {
+                    neighborString += "t";
+                }
+                if(i + 1 < tiles.Count && tiles[i + 1][j].CompareTag("Obstacle"))
+                {
+                    neighborString += "b";
+                }
+                if(j - 1 >= 0 && tiles[i][j - 1].CompareTag("Obstacle"))
+                {
+                    neighborString += "r";
+                }
+                if(j + 1 < tiles[i].Count && tiles[i][j + 1].CompareTag("Obstacle"))
+                {
+                    neighborString += "l";
+                }
+                
+                //tiles[i][j].GetComponent<SpriteRenderer>().sprite = lookUpGroundSprite[neighborString == "" ? "0" : neighborString];
             }
         }
 

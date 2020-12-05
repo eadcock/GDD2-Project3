@@ -106,7 +106,24 @@ MonoBehaviour:
   - g,g,g,g,g,g,g,g,g
   - g,g,g,g,g,g,g,g,g
   - g,g,g,g,g,g,g,g,g
+  enemies: []
+  groundSprites:
+  - {fileID: 8539718795578399560, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: 4517519814562779165, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -7234426477190875607, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -2328105726398972546, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: 2857944195593226126, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -767086384019470016, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -3949922391899481844, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: 2201721536860533404, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -3875864660279222179, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: 7024776364092259820, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  - {fileID: -1814799225426900047, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  obstacleSprites:
+  - {fileID: 6567634010573083423, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  activeEnemies: []
   grid: {fileID: 0}
+  enemyManager: {fileID: 0}
 --- !u!156049354 &1808114214604384846
 Grid:
   m_ObjectHideFlags: 0
