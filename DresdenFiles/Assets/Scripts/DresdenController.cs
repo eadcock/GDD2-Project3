@@ -83,8 +83,8 @@ public class DresdenController : MonoBehaviour
 
 
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                Dash();
+            /*if (Input.GetKeyDown(KeyCode.LeftShift))
+                Dash();*/
         }
     }
 

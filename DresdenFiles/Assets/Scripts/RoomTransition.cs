@@ -19,11 +19,14 @@ public class RoomTransition : MonoBehaviour
     // REPLACE THIS WITH A PROPER PAUSE SYSTEM
     public DresdenController dc;
 
+    public Door doorInfo;
+
     public void Start()
     {
         moving = false;
         dm = FindObjectOfType<DungeonManager>();
         dc = FindObjectOfType<DresdenController>();
+        doorInfo = GetComponent<Door>();
     }
 
     public void Update()
@@ -56,7 +59,7 @@ public class RoomTransition : MonoBehaviour
                 startMove = Time.time;
                 endMove = Time.time + moveDuration;
                 startPos = Camera.main.transform.position;
-                dc.transform.position += dm.DirectionToVec2(direction).FillZDim();
+                dc.transform.position += dm.DirectionToVec2(direction).FillZDim().Scale(2);
                 dc.SetPause(true);
             }
         }

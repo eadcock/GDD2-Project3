@@ -121,6 +121,8 @@ MonoBehaviour:
   - {fileID: -1814799225426900047, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
   obstacleSprites:
   - {fileID: 6567634010573083423, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  doorOpenSprite: {fileID: 3637071981521375843, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  doorClosedSprite: {fileID: 6567634010573083423, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
   activeEnemies: []
   grid: {fileID: 0}
   enemyManager: {fileID: 0}

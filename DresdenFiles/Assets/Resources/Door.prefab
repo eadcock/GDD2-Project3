@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7305413208337087861}
   - component: {fileID: -6254470634074900391}
   - component: {fileID: 6618469789865434962}
+  - component: {fileID: -2123136339973275439}
   m_Layer: 8
   m_Name: Door
   m_TagString: Ground
@@ -128,3 +129,21 @@ MonoBehaviour:
   moving: 0
   moveDuration: 1
   dc: {fileID: 0}
+  doorInfo: {fileID: 0}
+--- !u!114 &-2123136339973275439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7919873832244127802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28794e00bb3a1246bab417a31e02f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 0}
+  - {fileID: 0}
+  lockedSprite: {fileID: 6567634010573083423, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}
+  unlockedSprite: {fileID: 2857944195593226126, guid: 92f46d9b2bfd8ca4ab28747369ab56ce, type: 3}

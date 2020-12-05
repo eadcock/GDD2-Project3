@@ -42,31 +42,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[1]
-      value: o,o,g,g,g,g,g,o,o
+      value: o,o,g/tr,g/t,g/0,g/t,g/tl,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[2]
-      value: o,g,g,g,g,g,g,g,o
+      value: o,g/tr,g/b,g/0,g/0,g/0,g/b,g/tl,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[3]
-      value: g,g,o,g,g,g,o,g,g
+      value: g/tr,g/l,o,g/r,g/0,g/l,o,g/r,g/tl
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[4]
-      value: g,g,g,g,g,g,g,g,g
+      value: g/0,g/0,g/tb,g/0,g/0,g/0,g/tb,g/0,g/0
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[5]
-      value: g,g,o,g,g,g,o,g,g
+      value: g/br,g/l,o,g/r,g/0,g/l,o,g/r,g/bl
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[6]
-      value: o,g,g,g,g,g,g,g,o
+      value: o,g/br,g/t,g/0,g/0,g/0,g/t,g/bl,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: level.Array.data[7]
-      value: o,o,g,g,g,g,g,o,o
+      value: o,o,g/br,g/b,g/0,g/b,g/bl,o,o
       objectReference: {fileID: 0}
     - target: {fileID: 1808114214604384834, guid: f4a3ba60ec2c7b84e9feb12f92057851, type: 3}
       propertyPath: enemies.Array.data[0]

@@ -80,12 +80,12 @@ public class DungeonManager : MonoBehaviour
             //Debug.Log(currentPosition + DirectionToVec2(randomDir));
             if (currentRoom.neighbors.ContainsKey(randomDir))
             {
-                currentRoom = currentRoom[randomDir];
+                currentRoom = currentRoom.neighbors[randomDir];
             }
             else if (map.ContainsKey(currentPosition + DirectionToVec2(randomDir)))
             {
                 ConnectRooms(currentRoom, randomDir, map[currentPosition + DirectionToVec2(randomDir)]);
-                currentRoom = currentRoom[randomDir];
+                currentRoom = currentRoom.neighbors[randomDir];
             }
             else
             {
@@ -138,7 +138,7 @@ public class DungeonManager : MonoBehaviour
         while(randomizedDirections.Count > 0)
         {
             Direction dir = randomizedDirections.Dequeue();
-            if (!room.neighbors.ContainsKey(dir) || (room.neighbors.ContainsKey(dir) && room[dir] == null))
+            if (!room.neighbors.ContainsKey(dir) || (room.neighbors.ContainsKey(dir) && room.neighbors[dir] == null))
                 return dir;
         }
 
@@ -216,7 +216,8 @@ public class DungeonManager : MonoBehaviour
 
     public void ConnectRooms(RoomManager r1, Direction dir, RoomManager r2)
     {
-        r1[dir] = r2;
+        r1.SetNeighbor(dir, r2);
+        GameObject newDoor = r1.DrawDoor(dir);
         Direction opDir;
         switch (dir)
         {
@@ -233,7 +234,11 @@ public class DungeonManager : MonoBehaviour
                 opDir = Direction.East;
                 break;
         }
-        r2.SetNeighbor(opDir, r1, false);
+        r2.SetNeighbor(opDir, r1);
+        
+        r2.doors.Add(opDir, newDoor);
+
+        newDoor.GetComponent<Door>().rooms = new RoomManager[2] { r1, r2 };
     }
 
     public void MoveRoomRelativeTo(RoomManager r, Direction dir, RoomManager rRef)
@@ -282,7 +287,7 @@ public class DungeonManager : MonoBehaviour
         }
 
         currentRoom.Active = false;
-        currentRoom = currentRoom[(Direction)doorDir];
+        currentRoom = currentRoom.neighbors[(Direction)doorDir];
         currentRoom.Activate();
         return (currentRoom, (Direction)doorDir);
     }
