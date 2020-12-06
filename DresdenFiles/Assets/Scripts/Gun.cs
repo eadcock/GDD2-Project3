@@ -50,7 +50,6 @@ public class Gun : MonoBehaviour
             bullets = 6;
             reload = 1.5f;
         }
-        Debug.Log(reload);
     }
 }//delegate d
 

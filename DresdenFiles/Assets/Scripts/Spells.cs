@@ -14,6 +14,12 @@ public class Spells : MonoBehaviour
     bool cloneCreate = false;
     bool floodCreate = false;
 
+    public string CurrentSpell => fire ? "Fire" :
+                lightning ? "Lightning" :
+                clone ? "Clone" :
+                flood ? "Flood" :
+                "None";
+
     float fireCoolDown = 0;
     float lightningCoolDown = 0;
     float cloneCoolDown = 0;
