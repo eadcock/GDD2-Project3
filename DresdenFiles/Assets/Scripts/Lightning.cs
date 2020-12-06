@@ -2,25 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lightning
+public static class Lightning
 {
-    bool active;
-    int damage;
+    public static bool Active { get; set; }
 
-    public Lightning()
-    {
-        active = true;
-        damage = 10;
-    }
-
-    public bool Active
-    {
-        get { return active; }
-        set { active = value; }
-    }
-
-    public int Damage
-    {
-        get { return damage; }
-    }
+    public static int Damage => 5;
 }

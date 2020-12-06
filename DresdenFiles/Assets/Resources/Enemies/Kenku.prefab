@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3363239573885582806}
   - component: {fileID: -5254450283135403240}
   - component: {fileID: 579399010588835916}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kenku
   m_TagString: Untagged
   m_Icon: {fileID: 0}

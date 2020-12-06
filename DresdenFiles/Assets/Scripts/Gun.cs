@@ -30,7 +30,7 @@ public class Gun : MonoBehaviour
         float x = currentMousePosition.x - d.transform.position.x;
         angle = Mathf.Atan2(y, x);
 
-        if (Input.GetKeyDown(KeyCode.Space) && bullets != 0)
+        if (Input.GetMouseButtonDown(1) && bullets != 0)
         {
             b = new Bullet();
             Rigidbody2D clone;

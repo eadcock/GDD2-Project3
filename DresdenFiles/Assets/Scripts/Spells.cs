@@ -22,13 +22,14 @@ public class Spells : MonoBehaviour
 
     float fireCoolDown = 0;
     float lightningCoolDown = 0;
+    float lightningDrainCooldown;
     float cloneCoolDown = 0;
     float floodCoolDown = 0;
     float floodGrowth = .5f;
     float floodCounter = 3;
     float angle;
 
-    public Rigidbody fireBall;
+    public GameObject fireBallPrefab;
     public Transform lightningBolt;
     public Transform cloneBody;
     public Transform floodCircle;
@@ -36,12 +37,15 @@ public class Spells : MonoBehaviour
     private Stamina s;
     private Vector2 currentMousePosition;
 
+    public Anim animator;
+
 
     // Start is called before the first frame update
     void Start()
     {
         d = GetComponent<DresdenController>();
         s = d.GetComponent<Stamina>();
+        animator = d.GetComponent<Anim>();
     }
 
     // Update is called once per frame
@@ -85,28 +89,29 @@ public class Spells : MonoBehaviour
         //Use spell
         if (!InputManager.isPaused && Input.GetMouseButtonDown(0))
         {
-            if (fire == true && fireCoolDown <= 0)
+            if (fire == true && fireCoolDown <= 0 && s.RequestStaminaDrain(10))
             {
-                FireBall ball = new FireBall();
-                Rigidbody clone;
-                clone = Instantiate(fireBall, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
-                clone.velocity = (transform.TransformDirection(Mathf.Cos(angle),Mathf.Sin(angle),0))*5;
+                GameObject clone;
+                clone = Instantiate(fireBallPrefab, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
+                clone.GetComponent<Rigidbody2D>().velocity = (transform.TransformDirection(Mathf.Cos(angle),Mathf.Sin(angle),0))*5;
                 fireCoolDown = 1;
-                s.RequestStaminaDrain(10);
             }
-            if (lightning == true && lightningCoolDown <= 0)
+            if (lightning == true && lightningCoolDown <= 0 && s.RequestStaminaDrain(1))
             {
-                Lightning bolt = new Lightning();
                 if (lightningCreate == false)
                 {
-                    lightningBolt = Instantiate(lightningBolt, new Vector3(d.transform.position.x, d.transform.position.y, 0), Quaternion.identity);
+                    lightningBolt.gameObject.SetActive(true);
                     lightningCreate = true;
                 }
+                else
+                {
+                    lightningBolt.gameObject.SetActive(true);
+                }
                 buttonHold = true;
-                lightningCoolDown = 15;
-                s.RequestStaminaDrain(25);
+                lightningCoolDown = 1;
+                Lightning.Active = true;
             }
-            if(clone == true && cloneCoolDown <= 0)
+            if(clone == true && cloneCoolDown <= 0 && s.RequestStaminaDrain(30))
             {
                 cloneCreate = false;
                 if(cloneCreate == false)
@@ -115,15 +120,13 @@ public class Spells : MonoBehaviour
                     cloneCopy = Instantiate(cloneBody, new Vector3(d.transform.position.x, d.transform.position.y, -1), Quaternion.identity);
                     cloneCreate = true;
                     Destroy(cloneCopy.gameObject, 5);
-                    s.RequestStaminaDrain(30);
                 }
                 cloneCoolDown = 10;
             }
-            if(flood == true && floodCoolDown <= 0)
+            if(flood == true && floodCoolDown <= 0 && s.RequestStaminaDrain(50))
             {
                 floodCircle.transform.position = new Vector3(d.transform.position.x, d.transform.position.y, -1);
                 floodCreate = true;
-                s.RequestStaminaDrain(50);
                 floodCoolDown = 3;
             }
         }
@@ -138,15 +141,28 @@ public class Spells : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             buttonHold = false;
+            Lightning.Active = false;
         }
 
-        if (buttonHold == true)
+        if (buttonHold == true && Lightning.Active)
         {
-            lightningBolt.transform.position = d.transform.position;
+            lightningBolt.transform.position = d.transform.position + transform.TransformDirection(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 0.7f;
+            lightningBolt.transform.position = new Vector3(lightningBolt.transform.position.x, lightningBolt.transform.position.y - 0.3f, -1);
+            lightningBolt.transform.rotation = Quaternion.Euler(0, 0, Mathf.Sign(Mathf.Cos(angle)) == 1 ? Mathf.Sin(angle) * 90 : Mathf.Sin(angle) * -90);
+            lightningDrainCooldown += Time.deltaTime;
+            if (lightningDrainCooldown >= 0.1)
+            {
+                lightningDrainCooldown = 0;
+                if(!s.RequestStaminaDrain(1))
+                { 
+                    lightningBolt.gameObject.SetActive(false);
+                    Lightning.Active = false;
+                }
+            }
         }
         else
         {
-            lightningBolt.transform.position = new Vector3(0, 10, 0);
+            lightningBolt.gameObject.SetActive(false);
         }
 
         //Expand flood

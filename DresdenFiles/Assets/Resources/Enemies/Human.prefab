@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6759877202648136539}
   - component: {fileID: 7846539426299079626}
   - component: {fileID: 2957992718276068602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Human
   m_TagString: Ignore Spells
   m_Icon: {fileID: 0}

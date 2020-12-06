@@ -43,6 +43,8 @@ public class DresdenController : MonoBehaviour
     public bool Dashing { get; private set; }
 
     public bool Pause { get; set; }
+    
+    public Vector3 Direction { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +83,7 @@ public class DresdenController : MonoBehaviour
             animator.SetBool("LeftPressed", movement.x < 0);
             animator.SetBool("RightPressed", movement.x > 0);
 
-
+            Direction = new Vector3(Mathf.Sign(movement.x), Mathf.Sign(movement.y));
 
             /*if (Input.GetKeyDown(KeyCode.LeftShift))
                 Dash();*/
