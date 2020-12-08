@@ -7,12 +7,14 @@ public class DebugUI : MonoBehaviour
     Health health;
     Stamina stamina;
     Spells spells;
+    Gun gun;
     // Start is called before the first frame update
     void Start()
     {
         health = GetComponent<Health>();
         stamina = GetComponent<Stamina>();
         spells = GetComponent<Spells>();
+        gun = GetComponent<Gun>();
     }
 
     // Update is called once per frame
@@ -26,5 +28,6 @@ public class DebugUI : MonoBehaviour
         GUI.Label(new Rect(10, 10, 100, 50), $"Health: {health.CurrentHealth}/{health.MaxHealth}");
         GUI.Label(new Rect(10, 25, 200, 50), $"Stamina: {stamina.CurrentStamina}/{stamina.MaxStamina}");
         GUI.Label(new Rect(10, 40, 500, 50), $"Current Spell: {spells.CurrentSpell}");
+        GUI.Label(new Rect(10, 55, 500, 50), $"Ammo: {gun.bullets} / 6");
     }
 }

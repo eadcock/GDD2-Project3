@@ -31,6 +31,7 @@ public class DungeonManager : MonoBehaviour
         RoomManager currentRoom = rooms[0];
         this.currentRoom = currentRoom;
         currentRoom.name = "Room 0";
+        currentRoom.Completed = true;
         Vector2 currentPosition = new Vector2(0, 0);
         int currentNumRooms = 1;
         Dictionary<Vector2, RoomManager> map = new Dictionary<Vector2, RoomManager>

@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
 {
 
     public Bullet b = new Bullet();
-    int bullets = 6;
+    public int bullets = 6;
     float reload = 1.5f;
     float angle;
     private Vector2 currentMousePosition;
@@ -52,6 +52,7 @@ public class Gun : MonoBehaviour
         }
     }
 }//delegate d
+
 
 public class Bullet
 {

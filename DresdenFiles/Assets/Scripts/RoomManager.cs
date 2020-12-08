@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEditor;
 using quiet;
 using System.Linq;
-using UnityEditor.AI;
 
 public enum Direction
 {
@@ -155,8 +154,6 @@ public class RoomManager : MonoBehaviour
 
         BoxCollider collider = GetComponent<BoxCollider>();
         collider.size = new Vector2(grid.cellSize.x * Columns, grid.cellSize.y * Rows);
-
-        NavMeshBuilder.BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -248,6 +245,11 @@ public class RoomManager : MonoBehaviour
         foreach (KeyValuePair<Direction, GameObject> d in doors)
         {
             d.Value.GetComponent<Door>().Unlock();
+        }
+
+        if(name == "Boss Room")
+        {
+            Initiate.Fade("SampleScene", Color.white, 0.8f);
         }
     }
 

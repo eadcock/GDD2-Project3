@@ -16,6 +16,6 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
-        Initiate.Fade("SampleScene", Color.black, 0.7f);
+        Initiate.Fade("SampleScene", Color.white, 1.0f);
     }
 }
